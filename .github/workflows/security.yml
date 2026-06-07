@@ -1,0 +1,47 @@
+name: DevSecOps - Auditoria de Segurança
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  auditoria-dependencias:
+    name: Auditoria de Dependencias (SCA)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências npm
+        run: npm install
+
+      - name: Auditar dependências npm (npm audit)
+        run: npm audit --audit-level=critical
+
+  verificar-secrets:
+    name: Verificar Configuração de Secrets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Verificar presença do secret NASA_API_KEY
+        env:
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+        run: |
+          if [ -z "$NASA_API_KEY" ]; then
+            echo "ERRO: NASA_API_KEY nao configurada nos Secrets!"
+            exit 1
+          else
+            echo "OK: NASA_API_KEY esta configurada corretamente nos Secrets."
+            echo "Valor nao exibido por seguranca."
+          fi
