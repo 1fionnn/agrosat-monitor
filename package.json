@@ -1,0 +1,10 @@
+{
+  "name": "agrosat-monitor",
+  "version": "1.0.0",
+  "description": "Frontend React do AgroSat Monitor",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.4.0"
+  }
+}
