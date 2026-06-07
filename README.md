@@ -11,7 +11,7 @@ e alertas de focos de incêndio.
 ## Stack
 
 - Frontend: React
-- Backend: C# com ASP.NET Core
+- Backend: C# com ASP.NET Core e Java
 - Pipeline CI/CD: GitHub Actions
 - Dados: NASA FIRMS API, NASA Earthdata
 
